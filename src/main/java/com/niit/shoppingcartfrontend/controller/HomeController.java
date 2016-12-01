@@ -87,18 +87,19 @@ public class HomeController {
 		return mv;
 	}
 
-	@RequestMapping("/Category")
+	@RequestMapping("/aboutus")
 	public String category(Model model)
 	{
-		model.addAttribute("userClickedCategory","True");
+		model.addAttribute("userClickedAboutus","True");
 		return "index";
 	}
-	@RequestMapping("/product")
+	@RequestMapping("/contact")
 	public String product(Model model)
 	{
-		model.addAttribute("userClickedProduct","True");
+		model.addAttribute("userClickedContact","True");
 		return "index";
 	}
+	/*
 	@RequestMapping("/supplier")
 	public String supplier(Model model)
 	{
@@ -106,5 +107,11 @@ public class HomeController {
 		return "index";
 	}
 	
+	@RequestMapping("/home")
+	public String home(Model model)
+	{
+		model.addAttribute("userClickedHome","True");
+		return "index";
+	}*/
 }
 	

@@ -18,19 +18,23 @@ ${registerMessage}
 <jsp:include page="login.jsp" />
 </c:if>
 
+<c:if test="${isUserClickedHome}">
+<jsp:include page="index.jsp" />
+</c:if>
 <c:if test="${isUserClickedRegister}">
 <jsp:include page="register.jsp" />
 </c:if>
 
-<c:if test="${userClickedCategory}">
-<jsp:include page="admin/Category.jsp" />
+<c:if test="${userClickedAboutus}">
+<jsp:include page="aboutus.jsp" />
 </c:if>
-<c:if test="${userClickedProduct}">
-<jsp:include page="admin/product.jsp" />
+<c:if test="${userClickedContact}">
+<jsp:include page="contact.jsp" />
 </c:if>
-<c:if test="${userClickedSupplier}">
+<!-- <c:if test="${userClickedSupplier}">
 <jsp:include page="admin/supplier.jsp" />
-</c:if>
+</c:if> -->
+
 <jsp:include page="footer.jsp"/>
 </body>
 </html>

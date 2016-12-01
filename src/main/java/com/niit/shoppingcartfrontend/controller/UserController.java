@@ -67,7 +67,7 @@ public class UserController {
 	@RequestMapping(value = "/validate", method = RequestMethod.POST)
 
 	public ModelAndView login(@RequestParam(value = "username") String id,
-			@RequestParam(value = "Password") String password, HttpSession session) {
+			@RequestParam(value = "password") String password, HttpSession session) {
 		log.debug("Start of login method");
 
 		ModelAndView mv = new ModelAndView("/index");

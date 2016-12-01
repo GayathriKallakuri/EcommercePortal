@@ -7,12 +7,27 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div>LogIn</div>
-        <form action="index" method="post">
-            EmailID<input type="email" name="mailId" placeholder="Email ID" /><br/><br/>
-            Password<input type="password" name="password" placeholder="password" /><br/><br/>
-            <input type="submit" value="login" />   
-            <input type="checkbox" checked="checked"> Remember me
+
+	<div>LogIn with valid credentials
+	<br>${message}
+	<c:url var="action" value="/validate" ></c:url>
+        <form  name="loginForm" action="${action}" method="post">
+        <div class ="input-group margin-buttom-sm">
+        <span class="input=group-addon"><i class="fa fa-envelope-o fa-fw"></i>Email</span>
+        <input class="form-control" type="text" name="username" placeholder="mailId">
+        </div>
+       
+            <div class ="input-group ">
+        <span class="input=group-addon"><i class="fa fa-key fa-fw"></i>Password</span>
+        <input class="form-control" type="password" name="password" placeholder="password">
+        </div>
+           <div class="input-group">
+           <span class="input=group-addon"><i class="fa fa-key fa-fw"></i></span>
+            <input type="submit" value="login" align ="center"  />   </div>
+          
+            <input type="checkbox" checked="checked" align="center"> Remember me
+           
         </form>
+        </div>
 </body>
 </html>

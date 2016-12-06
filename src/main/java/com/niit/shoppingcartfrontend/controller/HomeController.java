@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.niit.shoppingcart.d.CategoryDAO;
@@ -66,52 +67,72 @@ public class HomeController {
 	return mv;
 	} 
 
-	@RequestMapping("/login")
+	@RequestMapping(value="/login" , method=RequestMethod.GET)
 	public ModelAndView login()
 	{
 		log.debug("start of login");
-		ModelAndView mv= new ModelAndView("/index");
-		mv.addObject("user", user);
+		ModelAndView mv= new ModelAndView("/index","command", new User() );
+		//mv.addObject("user", user);
 		mv.addObject("isUserClickedLogin", "true");
 		log.debug("end oflogin");
 		return mv;
 	}
-	@RequestMapping("/register")
+	
+	@RequestMapping(value="/register" , method=RequestMethod.GET)
 	public ModelAndView register()
 	{
 		log.debug("start of register");
-		ModelAndView mv=new ModelAndView("/index");
-		mv.addObject("user", user);
+		ModelAndView mv=new ModelAndView("/index","command",new User());
+		//mv.addObject("user", user);
 		mv.addObject("isUserClickedRegister","true");
 		log.debug("end of register");
 		return mv;
 	}
+	
 
 	@RequestMapping("/aboutus")
-	public String category(Model model)
+	public String about(Model model)
 	{
 		model.addAttribute("userClickedAboutus","True");
 		return "index";
 	}
 	@RequestMapping("/contact")
-	public String product(Model model)
+	public String contact(Model model)
 	{
 		model.addAttribute("userClickedContact","True");
 		return "index";
 	}
-	/*
-	@RequestMapping("/supplier")
-	public String supplier(Model model)
+	
+	@RequestMapping(value="/Category", method=RequestMethod.GET)
+	public ModelAndView category()
 	{
-		model.addAttribute("userClickedSupplier","True");
-		return "index";
+		log.debug("start of Category");
+		ModelAndView mv=new ModelAndView("/index","command",new Category());
+		mv.addObject("userClickedCategory","true");
+		log.debug("end of Category");
+		return mv;
 	}
 	
-	@RequestMapping("/home")
-	public String home(Model model)
+	@RequestMapping(value="/supplier", method=RequestMethod.GET)
+	public ModelAndView supplier()
 	{
-		model.addAttribute("userClickedHome","True");
-		return "index";
-	}*/
+		log.debug("start of supplier");
+		ModelAndView mv=new ModelAndView( "/index","command",new Supplier());
+		mv.addObject("userClickedSupplier","true");
+		log.debug("end of supplier");
+		return mv;
+	}
+	@RequestMapping(value="/product", method=RequestMethod.GET)
+	public ModelAndView product()
+	{
+		log.debug("start of product");
+		ModelAndView mv=new ModelAndView( "/index","command",new Product());
+		mv.addObject("userClickedProduct","true");
+		log.debug("end of product");
+		return mv;
+	}
+	
+	
+	
 }
 	

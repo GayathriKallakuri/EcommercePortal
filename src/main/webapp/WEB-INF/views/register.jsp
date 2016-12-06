@@ -10,36 +10,32 @@
 <body>
 	<div>
 		Sign Up
-		<form action="index" method="post">
-			<table>
-				<tr>
-					<td>Name :</td>
-					<td><input type="text" name="name"></td>
-					<br>
-				</tr>
-				<tr>
-					<td>Email :</td>
-					<td><input type="text" name="email"></td>
-					<br>
-				</tr>
-				<tr>
-					<td>Password :</td>
-					<td><input type="password" name="pwd"></td>
-					<br>
-				</tr>
-				<tr>
-					<td>Confirm Password :</td>
-					<td><input type="password" name="cpwd"><br>
-				</tr>
-				<tr>
-					<td>Address</td>
-					<td><input type="address" name="address"><br>
-				</tr>
-				<tr>
-					<td><input type="submit" value="Submit"></td>
-				</tr>
-			</table>
-		</form>
+		<form:form action="userSave" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="inputdefault">Name</label>
+      <form:input class="form-control" path="name" type="text" />
+    </div>
+    
+    <div class="form-group">
+      <label for="inputlg">Email</label>
+      <form:input class="form-control" path="email" type="email" />
+    </div>
+    <div class="form-group">
+      <label for="inputlg">Contact</label>
+      <form:input class="form-control" path="contact" type="text" />
+    </div>
+    <div class="form-group">
+      <label for="inputlg">Password</label>
+      <form:input class="form-control" path="password" type="password" />
+    </div>
+   
+    <br>
+    <br>
+  
+    	<button type="submit" class="btn btn-primary" value="submit">Submit</button>
+   	
+    
+  	</form:form>
 	</div>
 </body>
 </html>

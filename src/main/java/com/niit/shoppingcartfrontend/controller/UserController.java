@@ -66,22 +66,18 @@ public class UserController {
 
 	@RequestMapping(value = "/validate", method = RequestMethod.POST)
 
-	public ModelAndView login(@RequestParam(value = "username") String id,
+	public ModelAndView login(@RequestParam(value = "email") String id,
 			@RequestParam(value = "password") String password, HttpSession session) {
-		log.debug("Start of login method");
+		log.debug("Start of login method "+id);
 
-		ModelAndView mv = new ModelAndView("/index");
+		ModelAndView mv = new ModelAndView("/adminpg","command", new User());
 		user = userDAO.isValidUser(id, password);
-
+		
 		if (user != null) {
 			log.debug("Valid credentials");
-			user = userDAO.get(id);
-			session.setAttribute("loggedInUser", user.getName());
-			session.setAttribute("loggedInUserID", user.getId());
 
-			session.setAttribute("user", user);
-
-			if (user.getRole().equals("ROLE_ADMIN")) {
+            log.debug("User "+user.getRole());
+            if (user.getRole()==1) {
 				log.debug("Logged in as admin");
 
 				mv.addObject("isAdmin", "true");
@@ -91,6 +87,8 @@ public class UserController {
 
 				session.setAttribute("category", category);
 				session.setAttribute("categoryList", categoryDAO.list());
+				mv.addObject("categoryList", categoryDAO.list());
+				mv.addObject("supplierList", supplierDAO.list());
 			} else {
 				log.debug("Logged in as user");
 
@@ -101,8 +99,7 @@ public class UserController {
 				mv.addObject("cartList", cartList);
 				mv.addObject("cartSize", cartList.size());
 
-			}
-		} else {
+			}} else {
 			log.debug("Invalid credentials");
 
 			mv.addObject("invalidCredentials", "true");
@@ -112,6 +109,7 @@ public class UserController {
 		log.debug("end of login");
 		return mv;
 	}
+	
 
 	@RequestMapping("/logout")
 	public ModelAndView logout(HttpServletRequest request) {
@@ -128,21 +126,16 @@ public class UserController {
 
 		return mv;
 	}
-
-	/*@RequestMapping(value = "/register", method = RequestMethod.POST)
+	
+	@RequestMapping(value = "userSave", method = RequestMethod.POST)
 	public ModelAndView registerUser(@ModelAttribute User user) {
 		log.debug("Start of register method");
-		ModelAndView mv = new ModelAndView("/index");
-		if (userDAO.get(user.getId()) == null) {
-			user.setRole("ROLE_USER");
+			ModelAndView mv = new ModelAndView("/index");
+			user.setRole(0);
 			userDAO.saveOrUpdate(user);
 			log.debug("Succesfully registered");
 			mv.addObject("successMessage", "Successfully registered");
-		} else {
-			log.debug("User exists with this id");
-			mv.addObject("errorMessage", "User exists with this id");
-		}
 		log.debug("End of register method");
 		return mv;
-	}*/
+	}
 }

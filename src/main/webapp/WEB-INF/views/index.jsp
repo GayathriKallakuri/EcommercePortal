@@ -6,13 +6,18 @@
 <body> 
 
 
-<jsp:include page="header.jsp"/>
-
+<jsp:include page="header.jsp"/><br><br>
+<!--<jsp:include page="product_menu.jsp"/>-->
+<jsp:include page="carousel.jsp"/>
 <hr>
 ${registerMessage}
 <c:if test="${not empty errorMessage}">
 <jsp:include page="login.jsp" />
 </c:if>
+
+<c:if test="${userRole=='isAdmin'}">
+			<%@include file="adminpg.jsp" %>
+			</c:if>
 
 <c:if test="${isUserClickedLogin==true}">
 <jsp:include page="login.jsp" />
@@ -31,10 +36,19 @@ ${registerMessage}
 <c:if test="${userClickedContact}">
 <jsp:include page="contact.jsp" />
 </c:if>
-<!-- <c:if test="${userClickedSupplier}">
-<jsp:include page="admin/supplier.jsp" />
-</c:if> -->
-
+<c:if test="${userClickedCategory}">
+<jsp:include page="Category.jsp" />
+</c:if>
+<c:if test="${userClickedSupplier}">
+<jsp:include page="supplier.jsp" />
+</c:if> 
+<c:if test="${userClickedProduct}">
+<jsp:include page="product.jsp" />
+</c:if> 
+<br>
+<br>
+<br>
+<br>
 <jsp:include page="footer.jsp"/>
 </body>
 </html>

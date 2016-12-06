@@ -23,7 +23,7 @@ public class SupplierController {
 	@Autowired
 	private Supplier supplier;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String listSupplier(Model model) {
 		log.debug("Start of method to list the supplier");
 		model.addAttribute("supplier", supplier);
@@ -31,7 +31,7 @@ public class SupplierController {
 		model.addAttribute("isAdminClickedCategories", "true");
 		log.debug("End of method to list the supplier");
 		return "/index";
-	}
+	}*/
 
 	@RequestMapping(value = "/addsupplier", method = RequestMethod.POST)
 	public String addSupplier(@ModelAttribute("supplier") Supplier supplier, Model model) {
@@ -44,9 +44,9 @@ public class SupplierController {
 		}
 		model.addAttribute("supplier", supplier);
 		model.addAttribute("supplierList", supplierDAO.list());
-		model.addAttribute("isAdminClickedCategories", "true");
+		model.addAttribute("userClickedSupplier", "true");
 		log.debug("End of method add supplier");
-		return "/index";
+		return "redirect:./";
 	}
 	
 	@RequestMapping("deletesupplier/{id}" )

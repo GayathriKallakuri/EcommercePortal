@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Case</title>
+  <title>Ecommerce</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -12,7 +12,7 @@
 <div class="container text-center">
 
 <div class="page-header" align="center">
-<h1><img src="resources/images/watch.png"/> <small>The Watch Stop</small></h1>
+<h1><img src="D:\ShoppingCartFrontEnd\ShoppingCartFrontEnd\src\main\webapp\resources\images\1.jpg"/> <small>The Watch Stop</small></h1>
 <p>Trendy and Classy</p>
 </div>
 
@@ -26,6 +26,9 @@
       <li class="active"><a href="index">Home</a></li>
       <li class="active"><a href="aboutus">About Us</a></li>
       <li class="active"><a href="contact">Contact Us</a></li>
+      <!--<li class="active"><a href="Category">Category</a></li> -->
+      <li class="active"><a href="supplier">Supplier</a></li>
+      <li class="active"><a href="product">Product</a></li>
     </ul>
     <c:if test="${empty loggedInUser}">
     
@@ -38,12 +41,13 @@
       <c:if test="${empty loggedInUser }">
       <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       </c:if>
-      
+      </ul>
+      <ul>
        <c:if test="${!empty loggedInUser}">
      <span class="glyphicon glyphicon-shopping-cart"></span> 
-      <c:if test="${isAdmin}">
+   
       <a href="cart" >Cart</a><i class="fa-fa-shopping-cart">${cartSize }</i>
-      </c:if>
+  
       <li><a href="logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
       </c:if>
       </ul>

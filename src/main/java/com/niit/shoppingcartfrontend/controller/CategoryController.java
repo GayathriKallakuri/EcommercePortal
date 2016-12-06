@@ -23,7 +23,7 @@ public class CategoryController {
 	@Autowired
 	private Category category;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String listCategories(Model model) {
 		log.debug("Start of method to list the categories");
 		model.addAttribute("category", category);
@@ -31,7 +31,7 @@ public class CategoryController {
 		model.addAttribute("isAdminClickedCategories", "true");
 		log.debug("End of method to list the categories");
 		return "/index";
-	}
+	}*/
 
 	@RequestMapping(value = "/addcategory", method = RequestMethod.POST)
 	public String addCategory(@ModelAttribute("category") Category category, Model model) {
@@ -44,7 +44,7 @@ public class CategoryController {
 		}
 		model.addAttribute("category", category);
 		model.addAttribute("categoryList", categoryDAO.list());
-		model.addAttribute("isAdminClickedCategories", "true");
+		model.addAttribute("userClickedCategories", "true");
 		log.debug("End of method add category");
 		return "/index";
 	}

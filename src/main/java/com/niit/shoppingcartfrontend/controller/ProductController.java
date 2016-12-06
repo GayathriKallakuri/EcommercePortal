@@ -23,7 +23,7 @@ public class ProductController {
 	@Autowired
 	private Product product;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String listProducts(Model model) {
 		log.debug("Start of method to list the products");
 		model.addAttribute("product", product);
@@ -31,7 +31,7 @@ public class ProductController {
 		model.addAttribute("isAdminClickedProducts", "true");
 		log.debug("End of method to list the products");
 		return "/index";
-	}
+	}*/
 
 	@RequestMapping(value = "/addproduct", method = RequestMethod.POST)
 	public String addCategory(@ModelAttribute("product") Product product, Model model) {
@@ -46,7 +46,7 @@ public class ProductController {
 		model.addAttribute("productList", productDAO.list());
 		model.addAttribute("isAdminClickedProducts", "true");
 		log.debug("End of method add product");
-		return "/index";
+		return "redirect:./";
 	}
 	
 	@RequestMapping("deleteproduct/{id}" )

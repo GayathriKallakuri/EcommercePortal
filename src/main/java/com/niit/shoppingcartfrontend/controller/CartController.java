@@ -1,4 +1,4 @@
-package com.niit.shoppingcartfrontend.controller;
+/*package com.niit.shoppingcartfrontend.controller;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -101,3 +101,4 @@ return "redirect:/index";
 
 }
 
+*/

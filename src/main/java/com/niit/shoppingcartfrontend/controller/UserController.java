@@ -93,11 +93,19 @@ public class UserController {
 				log.debug("Logged in as user");
 
 				mv.addObject("isAdmin", "false");
-				cart = cartDAO.get(id);
+				session.setAttribute("category", category);
+				session.setAttribute("categoryList", categoryDAO.list());
+				session.setAttribute("product", product);
+				session.setAttribute("productList", productDAO.list());
+				
+				mv.addObject("categoryList", categoryDAO.list());
+				mv.addObject("productList", productDAO.list());
+				
+				/*cart = cartDAO.get(id);
 				mv.addObject("cart", cart);
 				List<Cart> cartList = cartDAO.list(id);
 				mv.addObject("cartList", cartList);
-				mv.addObject("cartSize", cartList.size());
+				mv.addObject("cartSize", cartList.size());*/
 
 			}} else {
 			log.debug("Invalid credentials");

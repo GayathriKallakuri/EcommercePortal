@@ -44,7 +44,7 @@ public class SupplierController {
 		}
 		model.addAttribute("supplier", supplier);
 		model.addAttribute("supplierList", supplierDAO.list());
-		model.addAttribute("userClickedSupplier", "true");
+		model.addAttribute("adminClickedSupplier", "true");
 		log.debug("End of method add supplier");
 		return "redirect:./";
 	}

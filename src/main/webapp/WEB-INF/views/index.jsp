@@ -36,13 +36,13 @@ ${registerMessage}
 <c:if test="${userClickedContact}">
 <jsp:include page="contact.jsp" />
 </c:if>
-<c:if test="${userClickedCategory}">
+<c:if test="${adminClickedAddCategory}">
 <jsp:include page="Category.jsp" />
 </c:if>
-<c:if test="${userClickedSupplier}">
+<c:if test="${adminClickedAddSupplier}">
 <jsp:include page="supplier.jsp" />
 </c:if> 
-<c:if test="${userClickedProduct}">
+<c:if test="${adminClickedAddProduct}">
 <jsp:include page="product.jsp" />
 </c:if> 
 <br>

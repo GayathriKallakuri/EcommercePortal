@@ -14,7 +14,7 @@
 		<table>
 			<tr>
 				<form:input path="name" hidden="true" />
-				<td><form:label path="name">
+				<td><form:label path="name">Name
 						<spring:message text="Name" />
 					</form:label>
 				</td>
@@ -22,7 +22,7 @@
 			</tr>
 				
 			<tr>
-				<td><form:label path="address">
+				<td><form:label path="address">Address
 						<spring:message text="Address" />
 					</form:label>
 				</td>
@@ -31,7 +31,7 @@
 			
 			<tr>
 				<td colspan="2">
-						<input type="submit" value="submit" />
+						<input type="submit" value="Submit" />
 				</td>
 			</tr>
 		</table>

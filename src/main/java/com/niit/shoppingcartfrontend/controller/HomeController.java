@@ -108,7 +108,7 @@ public class HomeController {
 	{
 		log.debug("start of Category");
 		ModelAndView mv=new ModelAndView("/index","command",new Category());
-		mv.addObject("userClickedCategory","true");
+		mv.addObject("adminClickedAddCategory","true");
 		log.debug("end of Category");
 		return mv;
 	}
@@ -118,7 +118,7 @@ public class HomeController {
 	{
 		log.debug("start of supplier");
 		ModelAndView mv=new ModelAndView( "/index","command",new Supplier());
-		mv.addObject("userClickedSupplier","true");
+		mv.addObject("adminClickedAddSupplier","true");
 		log.debug("end of supplier");
 		return mv;
 	}
@@ -127,7 +127,7 @@ public class HomeController {
 	{
 		log.debug("start of product");
 		ModelAndView mv=new ModelAndView( "/index","command",new Product());
-		mv.addObject("userClickedProduct","true");
+		mv.addObject("adminClickedAddProduct","true");
 		log.debug("end of product");
 		return mv;
 	}

@@ -27,8 +27,8 @@
       <li class="active"><a href="aboutus">About Us</a></li>
       <li class="active"><a href="contact">Contact Us</a></li>
       <!--<li class="active"><a href="Category">Category</a></li> -->
-      <li class="active"><a href="supplier">Supplier</a></li>
-      <li class="active"><a href="product">Product</a></li>
+      <!--<li class="active"><a href="supplier">Supplier</a></li> -->
+      <!--<li class="active"><a href="product">Product</a></li>-->
     </ul>
     <c:if test="${empty loggedInUser}">
     

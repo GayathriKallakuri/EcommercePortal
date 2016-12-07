@@ -44,7 +44,7 @@ public class ProductController {
 		}
 		model.addAttribute("product", product);
 		model.addAttribute("productList", productDAO.list());
-		model.addAttribute("isAdminClickedProducts", "true");
+		model.addAttribute("adminClickedProduct", "true");
 		log.debug("End of method add product");
 		return "redirect:./";
 	}

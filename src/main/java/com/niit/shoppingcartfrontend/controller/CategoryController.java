@@ -23,15 +23,15 @@ public class CategoryController {
 	@Autowired
 	private Category category;
 
-	/*@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/addcategory", method = RequestMethod.GET)
 	public String listCategories(Model model) {
 		log.debug("Start of method to list the categories");
 		model.addAttribute("category", category);
 		model.addAttribute("categoryList", categoryDAO.list());
-		model.addAttribute("isAdminClickedCategories", "true");
+		model.addAttribute("adminClickedCategory", "true");
 		log.debug("End of method to list the categories");
 		return "/index";
-	}*/
+	}
 
 	@RequestMapping(value = "/addcategory", method = RequestMethod.POST)
 	public String addCategory(@ModelAttribute("category") Category category, Model model) {
@@ -44,9 +44,9 @@ public class CategoryController {
 		}
 		model.addAttribute("category", category);
 		model.addAttribute("categoryList", categoryDAO.list());
-		model.addAttribute("userClickedCategories", "true");
+		model.addAttribute("adminClickedCategory", "true");
 		log.debug("End of method add category");
-		return "/index";
+		return "redirect:./";
 	}
 	
 	@RequestMapping("deletecategory/{id}" )

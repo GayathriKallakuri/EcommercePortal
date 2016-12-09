@@ -23,7 +23,7 @@ public class CategoryController {
 	@Autowired
 	private Category category;
 
-	@RequestMapping(value = "/addcategory", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String listCategories(Model model) {
 		log.debug("Start of method to list the categories");
 		model.addAttribute("category", category);
@@ -31,7 +31,7 @@ public class CategoryController {
 		model.addAttribute("adminClickedCategory", "true");
 		log.debug("End of method to list the categories");
 		return "/index";
-	}
+	}*/
 
 	@RequestMapping(value = "/addcategory", method = RequestMethod.POST)
 	public String addCategory(@ModelAttribute("category") Category category, Model model) {
@@ -50,7 +50,7 @@ public class CategoryController {
 	}
 	
 	@RequestMapping("deletecategory/{id}" )
-	public String deleteCategory(@PathVariable("id") String id, Model model)throws Exception{
+	public String deleteCategory(@PathVariable("id") int id, Model model)throws Exception{
 		log.debug("start of method delete category");
 		boolean flag=categoryDAO.delete(id);
 		String msg="Successfully deleted";
@@ -63,8 +63,8 @@ public class CategoryController {
 	}
 	
 	@RequestMapping("updatecategory/{id}" )
-	public String updateCategory(@PathVariable("id") String id, Model model)throws Exception{
-		log.debug("start of method delete category");
+	public String updateCategory(@PathVariable("id") int id, Model model)throws Exception{
+		log.debug("start of method update category");
 		category=categoryDAO.get(id);
 		model.addAttribute("category", category);
 		log.debug("End of method update category");

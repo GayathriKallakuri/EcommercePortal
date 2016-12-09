@@ -15,17 +15,14 @@ ${registerMessage}
 <jsp:include page="login.jsp" />
 </c:if>
 
-<c:if test="${userRole=='isAdmin'}">
-			<%@include file="adminpg.jsp" %>
+<c:if test="${isAdmin==true}">
+			<jsp:include page="adminpg.jsp" />
 			</c:if>
-
+			
 <c:if test="${isUserClickedLogin==true}">
 <jsp:include page="login.jsp" />
 </c:if>
 
-<c:if test="${isUserClickedHome}">
-<jsp:include page="index.jsp" />
-</c:if>
 <c:if test="${isUserClickedRegister}">
 <jsp:include page="register.jsp" />
 </c:if>

@@ -2,6 +2,8 @@ package com.niit.shoppingcartfrontend.controller;
 
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 
@@ -109,7 +111,9 @@ public class HomeController {
 		log.debug("start of Category");
 		ModelAndView mv=new ModelAndView("/index","command",new Category());
 		mv.addObject("adminClickedAddCategory","true");
-		log.debug("end of Category");
+		List<Category> category = categoryDAO.list();
+		mv.addObject("Categoryitems", category);
+     	log.debug("end of Category");
 		return mv;
 	}
 	
@@ -128,6 +132,10 @@ public class HomeController {
 		log.debug("start of product");
 		ModelAndView mv=new ModelAndView( "/index","command",new Product());
 		mv.addObject("adminClickedAddProduct","true");
+		List<Category> category = categoryDAO.list();
+		List<Supplier> supplier = supplierDAO.list();
+		mv.addObject("Category", category);
+		mv.addObject("Supplier", supplier);
 		log.debug("end of product");
 		return mv;
 	}

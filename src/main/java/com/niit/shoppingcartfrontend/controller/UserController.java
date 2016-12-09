@@ -70,14 +70,14 @@ public class UserController {
 			@RequestParam(value = "password") String password, HttpSession session) {
 		log.debug("Start of login method "+id);
 
-		ModelAndView mv = new ModelAndView("/adminpg","command", new User());
+		ModelAndView mv = new ModelAndView("/index","command", new User());
 		user = userDAO.isValidUser(id, password);
 		
 		if (user != null) {
 			log.debug("Valid credentials");
 
             log.debug("User "+user.getRole());
-            if (user.getRole()==1) {
+            if (user.getRole()==1){
 				log.debug("Logged in as admin");
 
 				mv.addObject("isAdmin", "true");
@@ -106,18 +106,18 @@ public class UserController {
 				List<Cart> cartList = cartDAO.list(id);
 				mv.addObject("cartList", cartList);
 				mv.addObject("cartSize", cartList.size());*/
-
-			}} else {
+            
+			} }
+	      else {
 			log.debug("Invalid credentials");
 
 			mv.addObject("invalidCredentials", "true");
 			mv.addObject("errorMessage", "invalidCredentials");
-
-		}
+	      }
+		
 		log.debug("end of login");
 		return mv;
 	}
-	
 
 	@RequestMapping("/logout")
 	public ModelAndView logout(HttpServletRequest request) {

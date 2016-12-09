@@ -14,6 +14,7 @@ import com.niit.shoppingcart.d.ProductDAO;
 import com.niit.shoppingcart.model.Product;
 
 @Controller
+@RequestMapping(value = "Product")
 public class ProductController {
 	Logger log = LoggerFactory.getLogger(ProductController.class);
 
@@ -33,8 +34,8 @@ public class ProductController {
 		return "/index";
 	}*/
 
-	@RequestMapping(value = "/addproduct", method = RequestMethod.POST)
-	public String addCategory(@ModelAttribute("product") Product product, Model model) {
+	@RequestMapping(value = "Product/addproduct" ,  method = RequestMethod.POST)
+	public String addProduct(@ModelAttribute("product") Product product, Model model) {
 		log.debug("Start of method add product");
 		log.debug("id:" + product.getId());
 		if (productDAO.addOrUpdate(product) == true) {

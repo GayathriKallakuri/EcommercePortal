@@ -2,60 +2,59 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
-
-
 	<h1>Add a Product</h1>
-		<form:form action="addproduct" enctype="multipart/form-data">
+		<form action="Product/addproduct/" method="post">
 			
 		<table>
 			<tr>
-				<form:input path="name" hidden="true" />
-				<td><form:label path="name">Name
-						<spring:message text="Name" />
-					</form:label>
+				<input path="name" hidden="true" />
+				<td><label path="name">Name
+						
+					</label>
 				</td>
-				<td><form:input path="name" required="true" /></td>
+				<td><input path="name" required="true" /></td>
 			</tr>
 			
 			<tr>
-				<td><form:label path="description">Description
-						<spring:message text="Desc" />
-					</form:label>
+				<td><label path="description">Description
+						
+					</label>
 				</td>
-				<td><form:input path="description" required="true" /></td>
+				<td><input path="description" required="true" /></td>
 			</tr>
 			
 			<tr>
-				<td><form:label path="price">Price
-						<spring:message text="Price" />
-					</form:label>
+				<td><label path="price">Price
+						
+					</label>
 				</td>
-				<td><form:input path="price" required="true" /></td>
+				<td><input path="price" required="true" /></td>
 			</tr>
 			
 			
 			
 			<tr>
-				<td><form:label path="stock">Stock
-						<spring:message text="stock" />
-					</form:label>
+				<td><label path="stock">Stock
+						
+					</label>
 				</td>
-				<td><form:input path="stock" required="true" /></td>
+				<td><input path="stock" required="true" /></td>
 			</tr>
 			
 			<tr>
-				<td><form:label path="category">Category
-						<spring:message text="category" />
-					</form:label>
+				<td><label path="category">Category
+						
+					</label>
 				</td>
 				<td>
-					<select name="category">
+					<select name="category" path="category">
 						<c:forEach var="c" items="${Category}">
 							<option value="${c.id}">${c.name}</option>
 						</c:forEach>
@@ -64,9 +63,9 @@
 			</tr>
 			
 			<tr>
-				<td><form:label path="supplier">Supplier
-						<spring:message text="supplier" />
-					</form:label>
+				<td><label path="supplier">Supplier
+						
+					</label>
 				</td>
 				<td>
 					<select name="supplier">
@@ -85,7 +84,7 @@
 				</td>
 			</tr>
 		</table>
-	</form:form>
+	</form>
 	
 	<br>
 	<h3>Product List</h3>

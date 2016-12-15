@@ -23,13 +23,23 @@
       <a class="navbar-brand" href="#">ShoppingCart</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="index">Home</a></li>
+      <li class="active"><a href="#">Home</a></li>
       <li class="active"><a href="aboutus">About Us</a></li>
       <li class="active"><a href="contact">Contact Us</a></li>
       <!--<li class="active"><a href="Category">Category</a></li> -->
       <!--<li class="active"><a href="supplier">Supplier</a></li> -->
       <!--<li class="active"><a href="product">Product</a></li>-->
     </ul>
+    <form class="navbar-form navbar-left">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search">
+        <div class="input-group-btn">
+          <button class="btn btn-default" type="submit">
+            <i class="glyphicon glyphicon-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
     <c:if test="${empty loggedInUser}">
     
     <ul class="nav navbar-nav navbar-right">

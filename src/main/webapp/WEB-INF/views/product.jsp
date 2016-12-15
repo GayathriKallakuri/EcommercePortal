@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -15,8 +16,7 @@
 		<table>
 			<tr>
 				<input path="name" hidden="true" />
-				<td><label path="name">Name
-						
+				<td><label path="name">Name	
 					</label>
 				</td>
 				<td><input path="name" required="true" /></td>
@@ -89,7 +89,7 @@
 	<br>
 	<h3>Product List</h3>
 	
-	<c:if test="${not empty products}">
+	<c:if test="${not empty Productlist}">
 		<table class="tg">
 			<tr>
 				<th width="80">Product ID</th>
@@ -103,17 +103,17 @@
 				<th width="60">Delete</th>
 			</tr>
 			
-			<c:forEach items="${products}" var="Product">
+			<c:forEach items="${Productlist}" var="Product">
 				<tr>
 					<td>${Product.id}</td>
 					<td>${Product.name}</td>
 					<td>${Product.description}</td>
 					<td>${Product.price}</td>
 					<td>${Product.stock}</td>
-					<td>${Product.category_id}</td>
-					<td>${Product.supplier_id}</td>		
-					<td><a href="<c:url value='Product/edit?p=${Product.id}' />">Edit</a></td>
-					<td><a href="<c:url value='Product/delete?p=${Product.id}'/>">Delete</a></td>
+					<td>${Product.category.name}</td>
+					<td>${Product.supplier.name}</td>		
+					<td><a href="<c:url value='/editproduct/${Product.id}' />">Edit</a></td>
+					<td><a href="<c:url value='/deleteproduct/${Product.id}'/>">Delete</a></td>
 				</tr>
 			</c:forEach>
 		</table>

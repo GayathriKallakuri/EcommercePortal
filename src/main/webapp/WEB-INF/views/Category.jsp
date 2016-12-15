@@ -12,24 +12,23 @@
 <body>
 	
 	<h1>Add a Category</h1>
-	<form:form action="addcategory" >
+	<form:form action="addcategory" method="post">
 	 	
 		<table>
 			<tr>
-				<form:input path="name" hidden="true" />
 				<td><form:label path="name">
-						<spring:message text="Name" />
+						<spring:message text="Name"/>
 					</form:label>
 				</td>
-				<td><form:input path="name" required="true" /></td>
+				<td><form:input path="name" required="true" value="${command.name}"/></td>
 			</tr>
 			
 			<tr>
 				<td><form:label path="description">
-						<spring:message text="Desc" />
+						<spring:message text="Desc"/>
 					</form:label>
 				</td>
-				<td><form:input path="description" required="true" /></td>
+				<td><form:input path="description" required="true" value="${command.description}"/></td>
 			</tr><br><br>
 			
 			<tr>
@@ -57,8 +56,8 @@
 					<td>${cat.id}</td>
 					<td>${cat.name}</td>
 					<td>${cat.description}</td>
-					<td><a href="<c:url value='/updatecategory?c=${cat.id}' />">Edit</a></td>
-					<td><a href="<c:url value='Category/deletecategory?c=${cat.id}'/>">Delete</a></td>
+					<td><a href="<c:url value='/editcategory/${cat.id}' />">Edit</a></td>
+					<td><a href="<c:url value='/deletecategory/${cat.id}'/>">Delete</a></td>
 				</tr>
 			</c:forEach>
 		</table>

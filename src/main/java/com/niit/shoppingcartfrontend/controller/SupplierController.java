@@ -1,5 +1,7 @@
 package com.niit.shoppingcartfrontend.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +11,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.niit.shoppingcart.d.SupplierDAO;
+import com.niit.shoppingcart.model.Category;
 import com.niit.shoppingcart.model.Supplier;
 
 @Controller
@@ -49,21 +53,19 @@ public class SupplierController {
 		return "redirect:./";
 	}
 	
-	@RequestMapping("deletesupplier/{id}" )
-	public String deleteSupplier(@PathVariable("id") String id, Model model)throws Exception{
+	@RequestMapping(value="deletesupplier/{id}" ,  method = RequestMethod.GET)
+	public ModelAndView deleteSupplier(@PathVariable("id") int id){
 		log.debug("start of method delete supplier");
-		boolean flag=supplierDAO.delete(id);
-		String msg="Successfully deleted";
-		if(flag!=true)
-			msg="Failure of delete";
-		model.addAttribute("msg",msg);
-		
+		supplierDAO.delete(id);
+		ModelAndView mv = new ModelAndView("redirect:/supplier");
+		List<Supplier> supplier = supplierDAO.list();
+		mv.addObject("Supplieritems", supplier);
 		log.debug("End of method delete supplier");
-		return "forward:/";
+		return mv; 
 	}
 	
 	@RequestMapping("updatesupplier/{id}" )
-	public String updateSupplier(@PathVariable("id") String id, Model model)throws Exception{
+	public String updateSupplier(@PathVariable("id") int id, Model model)throws Exception{
 		log.debug("start of method delete supplier");
 		supplier=supplierDAO.get(id);
 		model.addAttribute("supplier", supplier);
@@ -71,4 +73,12 @@ public class SupplierController {
 		return "forward:/";
 	}
 	
+	@RequestMapping(value="editsupplier/{id}" , method = RequestMethod.GET)
+	public ModelAndView editSupplier(@PathVariable("id") int id){
+		log.debug("start of method edit supplier");
+		ModelAndView mv=new ModelAndView("/index","command",supplierDAO.get(id));
+		mv.addObject("adminClickedAddSupplier","true");
+		log.debug("End of method edit supplier");
+		return mv;
+	}
 }

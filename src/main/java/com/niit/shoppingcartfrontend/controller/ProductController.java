@@ -1,5 +1,7 @@
 package com.niit.shoppingcartfrontend.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +11,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.niit.shoppingcart.d.ProductDAO;
 import com.niit.shoppingcart.model.Product;
+import com.niit.shoppingcart.model.Supplier;
 
 @Controller
-@RequestMapping(value = "Product")
+
 public class ProductController {
 	Logger log = LoggerFactory.getLogger(ProductController.class);
 
@@ -50,26 +54,32 @@ public class ProductController {
 		return "redirect:./";
 	}
 	
-	@RequestMapping("deleteproduct/{id}" )
-	public String deleteProduct(@PathVariable("id") String id, Model model)throws Exception{
-		log.debug("start of method delete category");
-		boolean flag=productDAO.delete(id);
-		String msg="Successfully deleted";
-		if(flag!=true)
-			msg="Failure of delete";
-		model.addAttribute("msg",msg);
-		
+	@RequestMapping(value="deleteproduct/{id}" ,  method = RequestMethod.GET)
+	public ModelAndView deleteProduct(@PathVariable("id") int id){
+		log.debug("start of method delete product");
+		productDAO.delete(id);
+		ModelAndView mv = new ModelAndView("redirect:/product");
+		List<Product> product = productDAO.list();
+		mv.addObject("Productlist", product);
 		log.debug("End of method delete product");
-		return "forward:/";
+		return mv; 
 	}
 	
 	@RequestMapping("updateproduct/{id}" )
-	public String updateProduct(@PathVariable("id") String id, Model model)throws Exception{
+	public String updateProduct(@PathVariable("id") int id, Model model)throws Exception{
 		log.debug("start of method delete product");
 		product=productDAO.get(id);
 		model.addAttribute("category", product);
 		log.debug("End of method update product");
 		return "forward:/";
 	}
-	
+
+	@RequestMapping(value="editproduct/{id}" , method = RequestMethod.GET)
+	public ModelAndView editProduct(@PathVariable("id") int id){
+		log.debug("start of method edit product");
+		ModelAndView mv=new ModelAndView("/index","command",productDAO.get(id));
+		mv.addObject("adminClickedAddProduct","true"); 
+		log.debug("End of method edit product");
+		return mv;
+	}
 }

@@ -7,6 +7,7 @@
 
 
 <jsp:include page="header.jsp"/><br><br>
+<jsp:include page="Categorylist.jsp"/><br><br>
 <!--<jsp:include page="product_menu.jsp"/>-->
 <jsp:include page="carousel.jsp"/>
 <hr>

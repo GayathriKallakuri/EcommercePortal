@@ -123,6 +123,8 @@ public class HomeController {
 		log.debug("start of supplier");
 		ModelAndView mv=new ModelAndView( "/index","command",new Supplier());
 		mv.addObject("adminClickedAddSupplier","true");
+		List<Supplier> supplier = supplierDAO.list();
+		mv.addObject("Supplieritems", supplier);
 		log.debug("end of supplier");
 		return mv;
 	}
@@ -132,6 +134,8 @@ public class HomeController {
 		log.debug("start of product");
 		ModelAndView mv=new ModelAndView( "/index","command",new Product());
 		mv.addObject("adminClickedAddProduct","true");
+		List<Product> product = productDAO.list();
+		mv.addObject("Productlist", product);
 		List<Category> category = categoryDAO.list();
 		List<Supplier> supplier = supplierDAO.list();
 		mv.addObject("Category", category);

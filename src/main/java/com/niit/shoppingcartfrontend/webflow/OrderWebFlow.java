@@ -6,8 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.niit.shoppingcart.dao.CartDAO;
+import com.niit.shoppingcart.d.CartDAO;
+import com.niit.shoppingcart.d.OrderDAO;
 import com.niit.shoppingcart.model.BillingAddress;
+import com.niit.shoppingcart.model.Cart;
 import com.niit.shoppingcart.model.Order;
 import com.niit.shoppingcart.model.PaymentMethod;
 import com.niit.shoppingcart.model.Product;
@@ -18,20 +20,31 @@ public class OrderWebFlow {
 	private static Logger log=LoggerFactory.getLogger(OrderWebFlow.class);
 	@Autowired
 	private ShippingAddress shippingAddress;
+	
 	@Autowired
 	private BillingAddress billingAddress;
+	
 	@Autowired
 	private User user;
+	
 	@Autowired
-	private Order orderDao;
+	private OrderDAO orderDao;
+	
 	@Autowired
 	 CartDAO cartdao ;
+	
 	@Autowired
-	 OrderDao orderdao ;
+	Order order;
+	
+	@Autowired
+	Cart cart;
+	
 	@Autowired
 	HttpSession httpSession;
+	
 	@Autowired
 	Product product;
+	
 	public Order initFlow(){
 		log.debug("WEBFLOW -> -> starting of the method initflow" );
 		order = new Order();
@@ -59,10 +72,9 @@ public class OrderWebFlow {
 		}
 			public String ConfirmOrder (Order order){
 				log.debug("WEBFLOW -> -> starting of the method initflow");
-				orderDao.saveOrUpdate(order);
+				orderDao.saveorupdate(order);
 				log.debug("WEBFLOW-> -> ending of the method");
 				return "success";
 	}
 }
-
 */

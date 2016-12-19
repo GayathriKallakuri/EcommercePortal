@@ -6,9 +6,8 @@
 <body> 
 
 
-<jsp:include page="header.jsp"/><br><br>
+<jsp:include page="header.jsp"/>
 <jsp:include page="Categorylist.jsp"/><br><br>
-<!--<jsp:include page="product_menu.jsp"/>-->
 <jsp:include page="carousel.jsp"/>
 <hr>
 ${registerMessage}
@@ -19,7 +18,11 @@ ${registerMessage}
 <c:if test="${isAdmin==true}">
 			<jsp:include page="adminpg.jsp" />
 			</c:if>
-			
+
+<c:if test="${loggedInUser==true}">
+<jsp:include page="cart.jsp"/>
+</c:if>
+		
 <c:if test="${isUserClickedLogin==true}">
 <jsp:include page="login.jsp" />
 </c:if>

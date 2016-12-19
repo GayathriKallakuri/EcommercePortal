@@ -23,7 +23,7 @@
       <a class="navbar-brand" href="#">ShoppingCart</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
+      <li class="active"><a href="">Home</a></li>
       <li class="active"><a href="aboutus">About Us</a></li>
       <li class="active"><a href="contact">Contact Us</a></li>
       <!--<li class="active"><a href="Category">Category</a></li> -->

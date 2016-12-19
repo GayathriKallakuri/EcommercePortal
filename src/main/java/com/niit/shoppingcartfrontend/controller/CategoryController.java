@@ -57,11 +57,12 @@ public class CategoryController {
 		model.addAttribute("CategoryList", cList);
 		model.addAttribute("isCategoryClicked", "true");
 		model.addAttribute("isProductClicked", "true");
+		model.addAttribute("product",productDAO);
 		log.debug("End of method to list the categories");
 		return "/index";
 	}
 
-	@RequestMapping(value = "/addcategory", method = RequestMethod.POST)
+	@RequestMapping(value = "addcategory", method = RequestMethod.POST)
 	public String addCategory(@ModelAttribute("category") Category category, Model model) {
 		log.debug("Start of method add category");
 		log.debug("id:" + category.getId());
@@ -88,7 +89,7 @@ public class CategoryController {
 		return mv; 
 	}
 	
-	@RequestMapping(value="updatecategory/{id}" , method = RequestMethod.POST)
+	@RequestMapping(value="updatecategory/{id}" , method = RequestMethod.GET)
 	public ModelAndView updateCategory(@ModelAttribute("category") Category category){
 		log.debug("start of method update category");
 		ModelAndView mv= new ModelAndView("redirect:/Category");
@@ -97,7 +98,7 @@ public class CategoryController {
 		return mv;
 	}
 	
-	@RequestMapping(value="editcategory/{id}" , method = RequestMethod.GET)
+	@RequestMapping(value="Category/editcategory/{id}" , method = RequestMethod.GET)
 	public ModelAndView editCategory(@PathVariable("id") int id){
 		log.debug("start of method edit category");
 		ModelAndView mv=new ModelAndView("/index","command",categoryDAO.get(id));

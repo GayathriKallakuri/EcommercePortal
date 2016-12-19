@@ -15,7 +15,6 @@
 			
 		<table>
 			<tr>
-				<input path="name" hidden="true" />
 				<td><label path="name">Name	
 					</label>
 				</td>

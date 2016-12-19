@@ -2,6 +2,7 @@ package com.niit.shoppingcartfrontend.controller;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -58,12 +59,25 @@ public class HomeController {
 	{
 		log.debug("start of onload");
 		ModelAndView mv=new ModelAndView("/index");
-		session.setAttribute("category", category);
-		session.setAttribute("product", product);
-		session.setAttribute("supplier", supplier);
-		
-		session.setAttribute("categoryList", categoryDAO.list());
-		session.setAttribute("supplierList", supplierDAO.list());
+		List<Category> cList = categoryDAO.list();
+		List<Product> productList = productDAO.list();
+		List<List> categoryList = new ArrayList(new ArrayList<Product>(5));
+		String[] categoryNameList = new String[categoryList.size()];
+		for (int i = 0; i < categoryList.size(); i++) {
+			categoryNameList[i] = categoryDAO.get(categoryDAO.get(i + 1).getId())
+					.getName();
+			List<Product> productsByCategoryId = productDAO.productByCategory(i + 1);
+			categoryList.add(productsByCategoryId);
+			System.out.println("categoryNameList " + categoryNameList[i]);
+
+		}
+		mv.addObject("product", product);
+		mv.addObject("category", category);
+		mv.addObject("ProductList", productList);
+		mv.addObject("CategoryList", cList);
+		mv.addObject("isCategoryClicked", "true");
+		mv.addObject("isProductClicked", "true");
+		mv.addObject("product",productDAO);
 		log.debug("end of onload");
 		
 	return mv;
@@ -75,6 +89,25 @@ public class HomeController {
 		log.debug("start of login");
 		ModelAndView mv= new ModelAndView("/index","command", new User() );
 		//mv.addObject("user", user);
+		List<Category> cList = categoryDAO.list();
+		List<Product> productList = productDAO.list();
+		List<List> categoryList = new ArrayList(new ArrayList<Product>(5));
+		String[] categoryNameList = new String[categoryList.size()];
+		for (int i = 0; i < categoryList.size(); i++) {
+			categoryNameList[i] = categoryDAO.get(categoryDAO.get(i + 1).getId())
+					.getName();
+			List<Product> productsByCategoryId = productDAO.productByCategory(i + 1);
+			categoryList.add(productsByCategoryId);
+			System.out.println("categoryNameList " + categoryNameList[i]);
+
+		}
+		mv.addObject("product", product);
+		mv.addObject("category", category);
+		mv.addObject("ProductList", productList);
+		mv.addObject("CategoryList", cList);
+		mv.addObject("isCategoryClicked", "true");
+		mv.addObject("isProductClicked", "true");
+		mv.addObject("product",productDAO);
 		mv.addObject("isUserClickedLogin", "true");
 		log.debug("end oflogin");
 		return mv;
@@ -85,6 +118,25 @@ public class HomeController {
 	{
 		log.debug("start of register");
 		ModelAndView mv=new ModelAndView("/index","command",new User());
+		List<Category> cList = categoryDAO.list();
+		List<Product> productList = productDAO.list();
+		List<List> categoryList = new ArrayList(new ArrayList<Product>(5));
+		String[] categoryNameList = new String[categoryList.size()];
+		for (int i = 0; i < categoryList.size(); i++) {
+			categoryNameList[i] = categoryDAO.get(categoryDAO.get(i + 1).getId())
+					.getName();
+			List<Product> productsByCategoryId = productDAO.productByCategory(i + 1);
+			categoryList.add(productsByCategoryId);
+			System.out.println("categoryNameList " + categoryNameList[i]);
+
+		}
+		mv.addObject("product", product);
+		mv.addObject("category", category);
+		mv.addObject("ProductList", productList);
+		mv.addObject("CategoryList", cList);
+		mv.addObject("isCategoryClicked", "true");
+		mv.addObject("isProductClicked", "true");
+		mv.addObject("product",productDAO);
 		//mv.addObject("user", user);
 		mv.addObject("isUserClickedRegister","true");
 		log.debug("end of register");
@@ -96,6 +148,7 @@ public class HomeController {
 	public String about(Model model)
 	{
 		model.addAttribute("userClickedAboutus","True");
+		
 		return "index";
 	}
 	@RequestMapping("/contact")
@@ -110,6 +163,25 @@ public class HomeController {
 	{
 		log.debug("start of Category");
 		ModelAndView mv=new ModelAndView("/index","command",new Category());
+		List<Category> cList = categoryDAO.list();
+		List<Product> productList = productDAO.list();
+		List<List> categoryList = new ArrayList(new ArrayList<Product>(5));
+		String[] categoryNameList = new String[categoryList.size()];
+		for (int i = 0; i < categoryList.size(); i++) {
+			categoryNameList[i] = categoryDAO.get(categoryDAO.get(i + 1).getId())
+					.getName();
+			List<Product> productsByCategoryId = productDAO.productByCategory(i + 1);
+			categoryList.add(productsByCategoryId);
+			System.out.println("categoryNameList " + categoryNameList[i]);
+
+		}
+		mv.addObject("product", product);
+		mv.addObject("category", category);
+		mv.addObject("ProductList", productList);
+		mv.addObject("CategoryList", cList);
+		mv.addObject("isCategoryClicked", "true");
+		mv.addObject("isProductClicked", "true");
+		mv.addObject("product",productDAO);
 		mv.addObject("adminClickedAddCategory","true");
 		List<Category> category = categoryDAO.list();
 		mv.addObject("Categoryitems", category);
@@ -122,6 +194,25 @@ public class HomeController {
 	{
 		log.debug("start of supplier");
 		ModelAndView mv=new ModelAndView( "/index","command",new Supplier());
+		List<Category> cList = categoryDAO.list();
+		List<Product> productList = productDAO.list();
+		List<List> categoryList = new ArrayList(new ArrayList<Product>(5));
+		String[] categoryNameList = new String[categoryList.size()];
+		for (int i = 0; i < categoryList.size(); i++) {
+			categoryNameList[i] = categoryDAO.get(categoryDAO.get(i + 1).getId())
+					.getName();
+			List<Product> productsByCategoryId = productDAO.productByCategory(i + 1);
+			categoryList.add(productsByCategoryId);
+			System.out.println("categoryNameList " + categoryNameList[i]);
+
+		}
+		mv.addObject("product", product);
+		mv.addObject("category", category);
+		mv.addObject("ProductList", productList);
+		mv.addObject("CategoryList", cList);
+		mv.addObject("isCategoryClicked", "true");
+		mv.addObject("isProductClicked", "true");
+		mv.addObject("product",productDAO);
 		mv.addObject("adminClickedAddSupplier","true");
 		List<Supplier> supplier = supplierDAO.list();
 		mv.addObject("Supplieritems", supplier);
@@ -133,6 +224,25 @@ public class HomeController {
 	{
 		log.debug("start of product");
 		ModelAndView mv=new ModelAndView( "/index","command",new Product());
+		List<Category> cList = categoryDAO.list();
+		List<Product> productList = productDAO.list();
+		List<List> categoryList = new ArrayList(new ArrayList<Product>(5));
+		String[] categoryNameList = new String[categoryList.size()];
+		for (int i = 0; i < categoryList.size(); i++) {
+			categoryNameList[i] = categoryDAO.get(categoryDAO.get(i + 1).getId())
+					.getName();
+			List<Product> productsByCategoryId = productDAO.productByCategory(i + 1);
+			categoryList.add(productsByCategoryId);
+			System.out.println("categoryNameList " + categoryNameList[i]);
+
+		}
+		mv.addObject("product", product);
+		mv.addObject("category", category);
+		mv.addObject("ProductList", productList);
+		mv.addObject("CategoryList", cList);
+		mv.addObject("isCategoryClicked", "true");
+		mv.addObject("isProductClicked", "true");
+		mv.addObject("product",productDAO);
 		mv.addObject("adminClickedAddProduct","true");
 		List<Product> product = productDAO.list();
 		mv.addObject("Productlist", product);

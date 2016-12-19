@@ -1,5 +1,6 @@
 package com.niit.shoppingcartfrontend.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -72,6 +73,25 @@ public class UserController {
 
 		ModelAndView mv = new ModelAndView("/index","command", new User());
 		user = userDAO.isValidUser(id, password);
+		List<Category> cList = categoryDAO.list();
+		List<Product> productList = productDAO.list();
+		List<List> categoryList = new ArrayList(new ArrayList<Product>(5));
+		String[] categoryNameList = new String[categoryList.size()];
+		for (int i = 0; i < categoryList.size(); i++) {
+			categoryNameList[i] = categoryDAO.get(categoryDAO.get(i + 1).getId())
+					.getName();
+			List<Product> productsByCategoryId = productDAO.productByCategory(i + 1);
+			categoryList.add(productsByCategoryId);
+			System.out.println("categoryNameList " + categoryNameList[i]);
+
+		}
+		mv.addObject("product", product);
+		mv.addObject("category", category);
+		mv.addObject("ProductList", productList);
+		mv.addObject("CategoryList", cList);
+		mv.addObject("isCategoryClicked", "true");
+		mv.addObject("isProductClicked", "true");
+		mv.addObject("product",productDAO);
 		
 		if (user != null) {
 			log.debug("Valid credentials");

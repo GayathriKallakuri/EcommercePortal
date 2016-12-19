@@ -1,7 +1,10 @@
-/*package com.niit.shoppingcartfrontend.controller;
+package com.niit.shoppingcartfrontend.controller;
 
+import java.util.Date;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -12,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,8 +23,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.niit.shoppingcart.d.CartDAO;
 import com.niit.shoppingcart.d.ProductDAO;
+import com.niit.shoppingcart.d.UserDAO;
 import com.niit.shoppingcart.model.Cart;
+import com.niit.shoppingcart.model.Category;
 import com.niit.shoppingcart.model.Product;
+import com.niit.shoppingcart.model.User;
 
 @Controller
 public class CartController {
@@ -33,72 +40,88 @@ private CartDAO cartDAO;
 private Cart cart;
 
 @Autowired
+private Product product;
+
+@Autowired
 private ProductDAO productDAO;
 
-@RequestMapping(value="/", method=RequestMethod.GET)
-public String Cart(Model model,HttpSession session)
-{
-	log.debug("Start of method cart");
-	model.addAttribute("cart",new Cart());
-	String loggedInUserId=(String)session.getAttribute("loggedInUserId");
-	if(loggedInUserId==null)
+@Autowired
+private User user;
+
+@Autowired
+private UserDAO userDAO;
+
+@Autowired
+private HttpSession session;
+
+
+@RequestMapping(value="/cart")
+
+	public ModelAndView cart()
 	{
-		Authentication auth=SecurityContextHolder.getContext().getAuthentication();
-		loggedInUserId=auth.getName();	
+		log.debug("start of Cart");
+		ModelAndView mv=new ModelAndView("/index","command",new Cart());
+		mv.addObject("loggedInUser","true");
+		cartDAO.list();
+		mv.addObject("Cartitems", cartDAO.list());
+     	log.debug("end of Cart");
+		return mv;
 	}
-	int cartSize=cartDAO.list(loggedInUserId).size();
-	if(cartSize==0){
-		model.addAttribute("error","No products in cart");
-	}
-	else{
-		model.addAttribute("cartList","cartDAO.list(loggedInUserId)");
-		model.addAttribute("totalAmount",cartDAO.getTotalAmount(loggedInUserId));
-		model.addAttribute("displayCart","true");
-	}
-	log.debug("End of method cart");
-	return "/index";
+	
+
+@RequestMapping(value="/addtocart/{id}",method=RequestMethod.GET)
+public ModelAndView addToCart(@PathVariable("id") int id,@ModelAttribute Cart cart,
+		@ModelAttribute Product product)
+{
+	log.debug("Start of method add to cart");
+	product=productDAO.get(id);
+	System.out.println(id);
+	cart.setCartDate(new Date());
+	cart.setProductName(product.getName());
+	cart.setUserId(userDAO.getUser());
+	System.out.println(id);
+	cart.setPrice(product.getPrice());
+	cart.setQuantity(1);
+	cart.setStatus('N');
+	
+	cartDAO.save(cart);
+	
+	List<Cart> cartList = cartDAO.list();
+	int cartItemSize = cartList.size();
+	
+	session.setAttribute("cartItemSize", cartItemSize);
+	System.out.println("CARTSIZE" + cartList.size());
+	
+	ModelAndView modelAndView = new ModelAndView("redirect:/productDetails/{id}");
+	modelAndView.addObject("product", product);
+	modelAndView.addObject("cartList", cartList);
+	return modelAndView;
 	
 }
 
-@RequestMapping(value="/add/{id}",method=RequestMethod.GET)
-public ModelAndView addToCart(@PathVariable("id") String id,HttpSession session)
-{
-	log.debug("Start of method add to cart");
-	Product product = productDAO.get(id);
-	cart.setPrice(product.getPrice());
-	cart.setProductName(product.getName());
-	String loggedInUserId=(String) session.getAttribute("loggedInUserId");
-	if(loggedInUserId==null)
-	{
-		Authentication auth=SecurityContextHolder.getContext().getAuthentication();
-		loggedInUserId = auth.getName();
-	}
-	cart.setUserId(loggedInUserId);
-	cart.setStatus("N");
-	cart.setId(ThreadLocalRandom.current().nextLong(100,1000000+1));
-	cartDAO.save(cart);
-	ModelAndView mv=new ModelAndView("redirect:/index");
-	mv.addObject("successmessage", "successfully added to the cart");
-	log.debug("end of method add to cart");
-	return mv;
-	}
-
-@RequestMapping("/delete/{id}")
-public String deleteCart(@PathVariable("id") String id,ModelMap model) throws Exception{
-log.debug("Start of method delete cart");
-try{
+@RequestMapping(value="deletecart/{id}" ,  method = RequestMethod.GET)
+public ModelAndView deleteCart(@PathVariable("id") int id){
+	log.debug("start of method delete cart");
 	cartDAO.delete(id);
-	model.addAttribute("message", "removed successfully");
-}
-catch(Exception e)
-{
-	model.addAttribute("message", e.getMessage());
-    e.printStackTrace();
-	}
-log.debug("End of method delete cart");
-return "redirect:/index";
+	ModelAndView mv = new ModelAndView("redirect:/cart");
+	List<Cart> cart = cartDAO.list();
+	mv.addObject("Cartitems", cart);
+	log.debug("End of method delete cart");
+	return mv; 
 }
 
+@RequestMapping(value="editcart/{id}",method = RequestMethod.GET)
+public ModelAndView updateCart(HttpServletRequest request,@PathVariable("id") int id){
+	log.debug("Start of method edit cart");
+	ModelAndView mv = new ModelAndView("redirect:/cart");
+	Cart cartItem=cartDAO.get(id);
+	System.out.println(id);
+	int q=Integer.parseInt(request.getParameter("q"));
+	cartItem.setQuantity(q);
+	cartDAO.save(cartItem);
+	log.debug("End of method edit cart");
+	return mv;
+}
 }
 
-*/
+

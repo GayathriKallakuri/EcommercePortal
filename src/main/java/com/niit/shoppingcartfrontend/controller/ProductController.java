@@ -28,15 +28,15 @@ public class ProductController {
 	@Autowired
 	private Product product;
 
-	/*@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String listProducts(Model model) {
-		log.debug("Start of method to list the products");
-		model.addAttribute("product", product);
-		model.addAttribute("productList", productDAO.list());
-		model.addAttribute("isAdminClickedProducts", "true");
-		log.debug("End of method to list the products");
-		return "/index";
-	}*/
+	@RequestMapping(value = "productDetails/{id}", method = RequestMethod.GET)
+	public ModelAndView productDetails(@PathVariable int id) {
+		log.debug("Start of method to display product details");
+		product = productDAO.get(id);
+		ModelAndView modelAndView = new ModelAndView("productdetails");
+		modelAndView.addObject("product", product);
+		log.debug("End of method to display product details");
+		return modelAndView;
+	}
 
 	@RequestMapping(value = "Product/addproduct" ,  method = RequestMethod.POST)
 	public String addProduct(@ModelAttribute("product") Product product, Model model) {

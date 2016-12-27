@@ -70,18 +70,28 @@ private HttpSession session;
 	
 
 @RequestMapping(value="/addtocart/{id}",method=RequestMethod.GET)
-public ModelAndView addToCart(@PathVariable("id") int id,@ModelAttribute Cart cart,
-		@ModelAttribute Product product)
+public ModelAndView addToCart(@PathVariable("id") int id,@ModelAttribute Cart cart)
 {
 	log.debug("Start of method add to cart");
-	product=productDAO.get(id);
+	System.out.println("hiiii");
+	user=userDAO.getUser();
+	Product product=productDAO.get(id);
+	System.out.println("userid is");
+	System.out.println(user.getId());
+	if(cartDAO.isInCart(user.getId(), product.getName())){
+		cart.setQuantity(1);
+	}
+	else{
+		Cart c=cartDAO.getCart(user.getId());
+		cart.setQuantity(c.getQuantity()+1);
+	}
 	System.out.println(id);
 	cart.setCartDate(new Date());
 	cart.setProductName(product.getName());
 	cart.setUserId(userDAO.getUser());
 	System.out.println(id);
 	cart.setPrice(product.getPrice());
-	cart.setQuantity(1);
+	
 	cart.setStatus('N');
 	
 	cartDAO.save(cart);
@@ -92,12 +102,15 @@ public ModelAndView addToCart(@PathVariable("id") int id,@ModelAttribute Cart ca
 	session.setAttribute("cartItemSize", cartItemSize);
 	System.out.println("CARTSIZE" + cartList.size());
 	
-	ModelAndView modelAndView = new ModelAndView("redirect:/productDetails/{id}");
+	ModelAndView modelAndView = new ModelAndView("redirect:/cart");
 	modelAndView.addObject("product", product);
 	modelAndView.addObject("cartList", cartList);
 	return modelAndView;
 	
 }
+
+
+
 
 @RequestMapping(value="deletecart/{id}" ,  method = RequestMethod.GET)
 public ModelAndView deleteCart(@PathVariable("id") int id){
@@ -111,17 +124,14 @@ public ModelAndView deleteCart(@PathVariable("id") int id){
 }
 
 @RequestMapping(value="editcart/{id}",method = RequestMethod.GET)
-public ModelAndView updateCart(HttpServletRequest request,@PathVariable("id") int id){
+public ModelAndView updateCart(HttpServletRequest request,@PathVariable("id") int userId,@PathVariable("id") int productId){
 	log.debug("Start of method edit cart");
 	ModelAndView mv = new ModelAndView("redirect:/cart");
-	Cart cartItem=cartDAO.get(id);
-	System.out.println(id);
-	int q=Integer.parseInt(request.getParameter("q"));
-	cartItem.setQuantity(q);
-	cartDAO.save(cartItem);
+//List<Cart> cartItem=cartDAO.isInCart(userId,productDAO.get(productId));
+	System.out.println(userId);
 	log.debug("End of method edit cart");
 	return mv;
 }
 }
-
+ 
 

@@ -37,7 +37,7 @@ public class SupplierController {
 		return "/index";
 	}*/
 
-	@RequestMapping(value = "/addsupplier", method = RequestMethod.POST)
+	@RequestMapping(value = "addsupplier", method = RequestMethod.POST)
 	public String addSupplier(@ModelAttribute("supplier") Supplier supplier, Model model) {
 		log.debug("Start of method add supplier");
 		log.debug("id:" + supplier.getId());

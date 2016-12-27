@@ -12,7 +12,7 @@
 <div class="container text-center">
 
 <div class="page-header" align="center">
-<h1><img src="D:\ShoppingCartFrontEnd\ShoppingCartFrontEnd\src\main\webapp\resources\images\1.jpg"/> <small>The Watch Stop</small></h1>
+<h1><img src="/ShoppingCartFrontEnd/src/main/webapp/WEB-INF/views/images/1.jpg"/> <small>The Watch Stop</small></h1>
 <p>Trendy and Classy</p>
 </div>
 
@@ -30,17 +30,8 @@
       <!--<li class="active"><a href="supplier">Supplier</a></li> -->
       <!--<li class="active"><a href="product">Product</a></li>-->
     </ul>
-    <form class="navbar-form navbar-left">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search">
-        <div class="input-group-btn">
-          <button class="btn btn-default" type="submit">
-            <i class="glyphicon glyphicon-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
-    <c:if test="${empty loggedInUser}">
+   
+    <c:if test="${loggedInUser==false}">
     
     <ul class="nav navbar-nav navbar-right">
       <li><a href="register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -48,16 +39,15 @@
       </c:if>
       
       <ul class="nav navbar-nav navbar-right">
-      <c:if test="${empty loggedInUser }">
+      <c:if test="${loggedInUser==false }">
       <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       </c:if>
-      </ul>
-      <ul>
-       <c:if test="${!empty loggedInUser}">
+     
+       <c:if test="${loggedInUser==true}">
      <span class="glyphicon glyphicon-shopping-cart"></span> 
    
-      <a href="cart" >Cart</a><i class="fa-fa-shopping-cart">${cartSize }</i>
-  
+     <a href="cart" >Cart</a><i class="fa-fa-shopping-cart">${cartSize }</i> 
+     <!--   <li><a href="cart"><span class="fa-fa-shopping-cart"></span>Cart</a></li>-->
       <li><a href="logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
       </c:if>
       </ul>

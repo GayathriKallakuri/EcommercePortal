@@ -41,7 +41,7 @@ public class CategoryController {
 		log.debug("Start of method to list the categories");
 		List<Category> cList = categoryDAO.list();
 		List<Product> productList = productDAO.list();
-		List<List> categoryList = new ArrayList(new ArrayList<Product>(5));
+		List<List> categoryList = new ArrayList(new ArrayList<Product>(10));
 		String[] categoryNameList = new String[categoryList.size()];
 		for (int i = 0; i < categoryList.size(); i++) {
 			categoryNameList[i] = categoryDAO.get(categoryDAO.get(i + 1).getId())
@@ -75,7 +75,7 @@ public class CategoryController {
 		model.addAttribute("categoryList", categoryDAO.list());
 		model.addAttribute("adminClickedCategory", "true");
 		log.debug("End of method add category");
-		return "redirect:./";
+		return "redirect:./Category";
 	}
 	
 	@RequestMapping(value="deletecategory/{id}" ,  method = RequestMethod.GET)

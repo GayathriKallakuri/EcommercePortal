@@ -11,7 +11,7 @@
 </head>
 <body>
 <h1>Add Supplier</h1>
-		<form:form action="../addsupplier" >
+		<form:form action="addsupplier" >
 			 
 		<table>
 			<tr>

@@ -155,7 +155,7 @@ public class UserController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "userSave", method = RequestMethod.POST)
+	@RequestMapping(value = "/userSave", method = RequestMethod.POST)
 	public ModelAndView registerUser(@ModelAttribute User user) {
 		log.debug("Start of register method");
 			ModelAndView mv = new ModelAndView("/index");

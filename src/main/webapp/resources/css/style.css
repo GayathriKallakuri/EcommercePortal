@@ -1,0 +1,68 @@
+@media (max-width:1024px){
+.h_menu4 {
+  width: 70%;
+}
+.header-top-right {
+  width: 30%;
+}
+.row_2 {
+  padding:34px;
+}	
+.search {
+  width: 65%;
+}
+ul.bag {
+  width: 29%;
+}
+.btn1 {
+  padding: 12px 35px;
+}  
+.banner_left {
+  padding: 2em 1em 0;
+}
+.banner_desc h2 {
+  font-size: 20px;
+}
+.banner_desc h1 {
+  font-size: 1.5em;
+  margin: 0.5em 0 0.2em;
+}
+.banner_desc h5 {
+  font-size: 1.5em;
+  margin: 0.4em 0 0.7em;
+}
+.btn1 {
+  padding: 8px 25px;
+}
+.banner_left {
+  min-height: 474px;
+  padding: 2em 1em 0;
+}
+.span_3 h3 {
+  font-size: 1.3em;
+}  
+.span1_of_2 {
+  width: 30.33333%;
+}
+.span_3_of_2 {
+  width: 45.3333%;
+}
+.images_3_of_2 {
+  width: 51.2%;
+}
+.span_3_of_2 h1 {
+  font-size: 1.1em;
+}
+p.m_5 {
+  font-size: 1.5em;
+}
+.row_5 input[type="text"] {
+  width: 31.666%;
+}
+.mens-toolbar .sort {
+  width: 35.5%;
+}
+.mens-toolbar .pager {
+  width: 50.5%;
+}
+}

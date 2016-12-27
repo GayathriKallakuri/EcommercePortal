@@ -75,6 +75,7 @@ public class HomeController {
 		mv.addObject("category", category);
 		mv.addObject("ProductList", productList);
 		mv.addObject("CategoryList", cList);
+		mv.addObject("loggedInUser", "true");
 		mv.addObject("isCategoryClicked", "true");
 		mv.addObject("isProductClicked", "true");
 		mv.addObject("product",productDAO);

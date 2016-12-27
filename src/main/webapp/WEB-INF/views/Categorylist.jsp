@@ -21,13 +21,14 @@
      
     <ul class="nav navbar-nav">
     <c:forEach items="${CategoryList}" var="c">
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">${c.name} <span class="caret"></span></a>
-        <ul class="dropdown-menu">
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">${c.name}  <span class="caret"></span></a>
+         <ul class="dropdown-menu">
         	<c:forEach items="${product.productByCategory(c.id)}" var="p">
           <li><a href="productDetails/${p.id}">${p.name}</a></li>
-          </c:forEach>
+           </c:forEach>
        </ul>
-      </c:forEach>
+       </li>
+        </c:forEach>   
        </ul>
   </div>
 </nav>
